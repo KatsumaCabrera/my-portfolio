@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap');
+
+:root {
+  --color-bg: #dff5ff;
+  --color-bg-deep: #c1e6ff;
+  --color-primary: #eaf7ff;
+  --color-accent: #2d7ff9;
+  --color-text: #123057;
+  --color-muted: #5a7ea8;
+  --color-white: #ffffff;
+
+  --color-border: rgba(18, 48, 87, 0.12);
+  --color-border-hover: rgba(45, 127, 249, 0.38);
+  --color-nav-scrolled: rgba(223, 245, 255, 0.88);
+  --color-surface: rgba(255, 255, 255, 0.36);
+
+  --font-sans: 'Manrope', 'Segoe UI', sans-serif;
+
+  --transition-base: 0.3s ease;
+  --hud-scale: 1;
+}
+
+[data-theme="light"] {
+  --color-bg: #eef9ff;
+  --color-bg-deep: #d9f0ff;
+  --color-primary: #f6fbff;
+  --color-accent: #1877f2;
+  --color-text: #163a5f;
+  --color-muted: #58789a;
+  --color-white: #ffffff;
+
+  --color-border: rgba(22, 58, 95, 0.18);
+  --color-border-hover: rgba(24, 119, 242, 0.46);
+  --color-nav-scrolled: rgba(238, 249, 255, 0.96);
+  --color-surface: rgba(255, 255, 255, 0.38);
+}
+
+[data-theme="dark"] {
+  --color-text: #dff5ff;;
+  --color-border: rgba(243, 247, 251, 0.32);
+  --color-border-hover: rgba(255, 255, 255, 0.7);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* ── Cielo fotográfico día/noche ─────────────── */
+body {
+  background: #8eb9d6;
+  transition: background-color 0.45s ease;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+[data-theme="dark"] body {
+  background: #172536;
+}
+
+/* ── Fotografía de fondo ─────────────────────── */
+.sky {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  pointer-events: none;
+  background: linear-gradient(rgba(8, 32, 58, 0.18), rgba(8, 32, 58, 0.18)), url('../assets/images/piqsels.com-id-oonwj.jpg') center 38% / cover no-repeat;
+  transition: background-color 0.45s ease;
+  animation: sky-drift 12s ease-in-out infinite alternate;
+}
+
+.sky::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(rgba(3, 15, 28, 0.2), rgba(3, 15, 28, 0.2)), url('../assets/images/piqsels.com-id-fnqzb.jpg') center center / cover no-repeat;
+  opacity: 0;
+  transition: opacity 2s ease-in-out;
+}
+
+[data-theme="dark"] .sky::after {
+  opacity: 1;
+}
+
+@keyframes sky-drift {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.09);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sky {
+    animation: none;
+  }
+}
+
+@media (max-width: 600px) {
+  .sky {
+    background-position: 38% center;
+  }
+
+  .sky::after {
+    background-position: 38% center;
+  }
+}
+
+
+.container {
+  width: 100%;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+.top-controls {
+  position: fixed;
+  top: 1.5rem;
+  right: 1.5rem;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.nav__controls {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.lang-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid var(--color-border);
+  border-radius: 999px;
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 7px 14px 7px 10px;
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: border-color var(--transition-base), transform var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
+}
+
+.lang-btn:hover {
+  border-color: var(--color-border-hover);
+  background: rgba(255, 255, 255, 0.54);
+  transform: translateY(-1px);
+}
+
+.lang-btn svg {
+  flex-shrink: 0;
+  opacity: 0.85;
+}
+
+.nav__lang {
+  position: static;
+}
+
+.theme-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text);
+  cursor: pointer;
+  backdrop-filter: blur(6px);
+  transition: border-color var(--transition-base), transform var(--transition-base), background var(--transition-base), box-shadow var(--transition-base);
+}
+
+.theme-btn:hover {
+  border-color: var(--color-border-hover);
+  transform: translateY(-1px);
+}
+
+.theme-btn__moon { display: none; }
+.theme-btn__sun { display: block; }
+
+[data-theme="light"] .theme-btn__sun { display: none; }
+[data-theme="light"] .theme-btn__moon { display: block; }
+
+.nav__theme {
+  position: static;
+}
+
+[data-hud="1"] { --hud-scale: 1; }
+[data-hud="2"] { --hud-scale: 1.25; }
+
+html {
+  font-size: calc(16px * var(--hud-scale));
+}
+
+.font-size-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: rgba(255, 255, 255, 0.38);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  color: var(--color-text);
+  cursor: pointer;
+  transition: border-color var(--transition-base), transform var(--transition-base), background var(--transition-base);
+  position: static;
+}
+
+.font-size-btn:hover {
+  border-color: var(--color-border-hover);
+}
+
+[data-hud="2"] .font-size-btn,
+[data-hud="3"] .font-size-btn {
+  border-color: var(--color-border-hover);
+}

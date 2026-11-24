@@ -1,0 +1,11 @@
+# Copias de seguridad y archivos sin uso
+*.bak
+assets/favicon.svg
+
+# Archivos de sistema
+desktop.ini
+Thumbs.db
+.DS_Store
+
+# CV con teléfono (solo para mandar por mail, no se publica)
+cv-con-telefono/
