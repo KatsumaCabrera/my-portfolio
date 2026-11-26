@@ -642,3 +642,12 @@ body {
   font-size: 0.9rem;
   color: var(--card-muted);
 }
+
+.badge--done {
+  background: rgba(34, 170, 90, 0.16);
+  color: #1d8a4b;
+}
+
+[data-theme="dark"] .badge--done {
+  color: #6fdc9b;
+}
